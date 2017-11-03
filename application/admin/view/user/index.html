@@ -1,0 +1,32 @@
+{include file='public/header'}
+
+ <a href="{:url('add')}" class="btn btn-info">添加用户</a>
+    <h2>用户管理界面</h2>
+    <div class="row">
+       
+    </div>
+    <table class="table">
+        <tr>
+            <th>编号</th>
+            <th>用户名称</th>
+            <th>创建时间</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        {foreach $user_list as $value}
+        <tr>
+            <td>{$value['id']}</td>
+            <td>{$value['user_name']}</td>
+            <td>{$value['create_time']|date="Y-m-d H:i:s",###}</td>
+            <td>{$value['status']==1?'√':'×'}</td>
+            <td>
+                <a href="{:url('auditing',['id'=>$value['id']])}" class="btn btn-primary">成为专家</a>
+                <a href="" class="btn btn-danger">删除</a>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+
+    <div>{$user_list->render()}</div>
+
+{include file='public/footer'}

@@ -1,0 +1,58 @@
+{include file='public/header'}
+
+ <a href="{:url('add')}" class="btn btn-info">添加课程</a>
+    <h2>课程管理界面</h2>
+    <div class="row">
+        <form action="" class="form ">
+            <div class="form-group">
+                <label >课程分类</label>
+                <select name="cate_id">
+                    <option value="">请选择</option>
+                    <!-- {foreach $cate_tree as $value} -->
+                    <option disabled="" value="{$value['id']}">{$value['cate_name']}</option>
+                    <!-- <?php if (isset($value['child_menu'])){ ?>
+                    -->
+                    <!-- {foreach $value['child_menu'] as $second_value} -->
+                    <option disabled="" value="{$second_value['id']}" style="padding-left:10px;">{$second_value['cate_name']}</option>
+                    <!-- <?php if (isset($second_value['child_menu'])){ ?>
+                    -->
+                    <!-- {foreach $second_value['child_menu'] as $third_value} -->
+                    <option value="{$third_value['id']}" style="padding-left:30px;">{$third_value['cate_name']}</option>
+                    <!-- {/foreach} -->
+                    <!-- <?php } ?>
+                    -->
+                    <!-- {/foreach} -->
+                    <!-- <?php } ?>
+                    -->
+                    <!-- {/foreach} --> </select>
+                <input type="submit" class="btn btn-info" value="搜索"></div>
+
+        </form>
+    </div>
+    <table class="table">
+        <tr>
+            <th>编号</th>
+            <th>课程名称</th>
+            <th>课程分类</th>
+            <th>课程价格</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        {foreach $class_list as $value}
+        <tr>
+            <td>{$value['id']}</td>
+            <td>{$value['class_name']|substr=0,27}</td>
+            <td>{$value['cate_name']}</td>
+            <td>{$value['class_price']}</td>
+            <td>{$value['create_time']|date="Y-m-d H:i:s",###}</td>
+            <td>
+                <a href="{:url('edit',['id'=>$value['id']])}" class="btn btn-info">编辑</a>
+                <a href="" class="btn btn-danger">删除</a>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+
+    <div>{$class_list->render()}</div>
+
+{include file='public/footer'}

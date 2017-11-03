@@ -1,0 +1,38 @@
+{include file='public/header'}
+
+ <a href="{:url('add')}" class="btn btn-info">添加专家</a>
+    <h2>专家管理界面</h2>
+    <div class="row">
+       
+    </div>
+    <table class="table">
+        <tr>
+            <th>编号</th>
+            <th>专家名称</th>
+            <th>提问金额</th>
+            <th>申请时间</th>
+            <th>是否认证</th>
+            <th>状态</th>
+            <th>排序</th>
+            <th>操作</th>
+        </tr>
+        {foreach $vip_list as $value}
+        <tr>
+            <td>{$value['id']}</td>
+            <td>{$value['vip_uid']}</td>
+            <td>{$value['vip_money']}</td>
+            <td>{$value['add_time']|date="Y-m-d H:i:s",###}</td>
+            <td>{$value['is_real']==1?'认证':'未认证'}</td>
+            <td>{$value['status']==1?'√':'×'}</td>
+            <td>{$value['sort']}</td>
+            <td>
+                <a href="{:url('edit',['id'=>$value['id']])}" class="btn btn-info">编辑</a>
+                <a href="" class="btn btn-danger">删除</a>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+
+    <div>{$vip_list->render()}</div>
+
+{include file='public/footer'}

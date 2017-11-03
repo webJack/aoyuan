@@ -1,0 +1,55 @@
+{include file='public/header'}
+
+	 <form action="{:url('update')}" method="post">
+	 	<div class="form-group">
+	 		<label >商品名称</label>
+	 		<input type="text" class="form-control" value="{$info.class_name}" name="class_name">
+	 	</div>
+	 	<div class="form-group">
+	 		<label >商品价格</label>
+	 		<input type="text" class="form-control" value="{$info.class_price}" name="class_price">
+	 	</div>
+	 	<div class="form-group">
+	 		<label >上级分类</label>
+	 		 <select name="cate_id">
+                    <option value="">请选择</option>
+                    <!-- {foreach $cate_tree as $value} -->
+                    <option disabled="" value="{$value['id']}">{$value['cate_name']}</option>
+                     <!-- <?php if (isset($value['child_menu'])){ ?> -->
+                        <!-- {foreach $value['child_menu'] as $second_value} -->
+                            <option disabled="" value="{$second_value['id']}" style="padding-left:10px;">{$second_value['cate_name']}</option>
+                             <!-- <?php if (isset($second_value['child_menu'])){ ?> -->
+                            <!-- {foreach $second_value['child_menu'] as $third_value} -->
+                                <option {if $info.cate_id == $third_value['id']} selected {/if} value="{$third_value['id']}" style="padding-left:30px;">{$third_value['cate_name']}</option>
+                             <!-- {/foreach} -->
+                        <!-- <?php } ?> -->
+                             
+                         <!-- {/foreach} -->
+                        <!-- <?php } ?> -->
+
+                     <!-- {/foreach} -->
+                </select>
+	 	</div>
+	 	<div class="form-group">
+	 		<label>
+	 			class_content
+	 		</label>
+	 		<textarea id="text_content" name="class_content" style="width:80%">
+	 		{$info.class_content}
+	 		</textarea>
+	 	</div>
+	 	<div class="form-group">
+	 	  	<input type="hidden" name="id" value="{$info.id}">
+	 		<input type="submit" value="添加" class="btn btn-info">
+	 	</div>
+	 </form>
+
+
+	<script type="text/javascript" src="__PUBLIC__/static/library/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/static/library/ueditor/ueditor.all.min.js"></script>
+	<!-- 实例化编辑器 -->
+	<script type="text/javascript">
+   		var ue = UE.getEditor('text_content');
+	</script>
+
+{include file='public/footer'}

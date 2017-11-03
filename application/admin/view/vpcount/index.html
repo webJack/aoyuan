@@ -1,0 +1,32 @@
+{include file='public/header'}
+
+    <h2>专家统计管理界面</h2>
+
+    <table class="table">
+        <tr>
+            <th>编号</th>
+            <th>专家id</th>
+            <th>回答数量</th>
+            <th>收听数量</th>
+            <th>关注数量</th>
+            <th>评分</th>
+        </tr>
+        {foreach $count_list as $value}
+        <tr>
+            <td>{$value['id']}</td>
+            <td>{$value['uid']}</td>
+            <td>{$value['answer_count']}</td>
+            <td>{$value['follow_count']}</td>
+            <td>{$value['receive_count']}</td>
+            <td>{$value['score']}</td>
+            <td>
+                <a href="{:url('edit',['id'=>$value['id']])}" class="btn btn-info">编辑</a>
+                <a href="" class="btn btn-danger">删除</a>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+
+    <div>{$count_list->render()}</div>
+
+{include file='public/footer'}
